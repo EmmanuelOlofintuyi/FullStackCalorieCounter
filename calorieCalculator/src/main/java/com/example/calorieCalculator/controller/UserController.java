@@ -20,10 +20,23 @@ public class UserController {
         return "New user added to the database";
     }
 
-    @GetMapping("/getAllUsers")
+    @GetMapping("/users")
     public List<User> getAllUsers(){
         return userService.getAllUsers();
     }
 
+    @GetMapping("/user/{id}")
+    public User getUserById(@PathVariable Long id){
+        return userService.getUserById(id);
+    }
 
+    @PutMapping("/user/{id}")
+    public User updatUser(@RequestBody User newUser, @PathVariable Long id){
+        return userService.updateUser(newUser, id);
+    }
+
+    @DeleteMapping("/user/{id}")
+    public String deleteUser(@PathVariable Long id){
+        return userService.deleteUser(id);
+    }
 }
