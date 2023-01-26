@@ -19,7 +19,7 @@ When I develop the UI user should be able to
   - lifestyle
   - goal
 ### GET
-  this lets the user view ther and others information
+  this lets the user view ther and others information <br/>
   _maybe in the future I will make two type of users. A General User and a Admin, this would let me control who can see all the users_
 ### PUT
   User will be able to edit there information
