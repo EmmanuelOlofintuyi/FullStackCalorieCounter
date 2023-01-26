@@ -12,7 +12,7 @@ A user has these properties
 ## GUI 
 When I develop the UI user should be able to
 ### POST
-  this lets the user input there informaition
+  this lets the user input there informaition and then it will be posted in the Database
   - name
   - date of birth
   - weight
