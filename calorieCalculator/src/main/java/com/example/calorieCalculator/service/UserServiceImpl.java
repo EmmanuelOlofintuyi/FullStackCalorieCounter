@@ -34,8 +34,8 @@ public class UserServiceImpl implements UserService{
         return userRepository.findById(id)
                 .map(user -> {
                     user.setName(newUser.getName());
-                    user.setDob(newUser.getDob());
                     user.setEmail(newUser.getEmail());
+                    user.setDob(newUser.getDob());
                     user.setWeight(newUser.getWeight());
                     user.setLifestyle(newUser.getLifestyle());
                     user.setGoal(newUser.getGoal());

@@ -18,18 +18,25 @@ public class User {
     @Transient
     private Integer suggestedCalories;
     private Integer lifestyle;
-    private Goal goal;
+    private String goal;
     private Double weight;
 
     public User() {
     }
 
-    public User(String name, String email, LocalDate dob, Integer lifestyle, Double weight) {
+    public User(String name, String email, LocalDate dob, String goal, Integer lifestyle, Double weight) {
         this.name = name;
         this.email = email;
         this.dob = dob;
         this.lifestyle = lifestyle;
+        this.goal = goal;
         this.weight = weight;
+    }
+
+    public User(String name, String email, LocalDate dob) {
+        this.name = name;
+        this.email = email;
+        this.dob = dob;
     }
 
     public Long getId() {
@@ -96,20 +103,29 @@ public class User {
         this.weight = weight;
     }
 
-    public Goal getGoal() {
+//    public Goal getGoal() {
+//        return goal;
+//    }
+//
+//    public void setGoal(Goal goal) {
+//        this.goal = goal;
+//    }
+
+
+    public String getGoal() {
         return goal;
     }
 
-    public void setGoal(Goal goal) {
+    public void setGoal(String goal) {
         this.goal = goal;
     }
 
     public Integer calculateCalories(){
         Double calories = 0.0;
 
-        Goal goal = getGoal();
+        String goal = getGoal();
         Integer lifeStyleValue = getLifestyle();
-        if(goal.equals(Goal.LOSE)) {
+        if(goal.equals("LOSE")) {
             calories = (weight*10);
             if (lifeStyleValue <= 1) {
                 calories -= 500;
@@ -122,7 +138,7 @@ public class User {
             } else {
                 calories +=0;
             }
-        } else if (goal.equals(Goal.GAIN) ){
+        } else if (goal.equals("GAIN") ){
             calories = ((weight*15)+500);
             if (lifeStyleValue <= 1) {
                 calories -= 500;
