@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -27,6 +29,22 @@ public class UserServiceImpl implements UserService{
     public User getUserById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(()->new UserNotFoundException(id));
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        User user = userRepository.findUserByEmail(email);
+        if (email != null &&
+                email.length() > 0 &&
+                !Objects.equals(user.getEmail(), email)) {
+            User userOptional = userRepository
+                    .findUserByEmail(email);
+            if (userOptional == null) {
+                throw new IllegalStateException("email does not exist");
+            }
+            return user;
+        }
+        return null;
     }
 
     @Override
