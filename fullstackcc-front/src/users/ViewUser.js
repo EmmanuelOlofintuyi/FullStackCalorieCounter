@@ -1,8 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 
-import {useParams, useNavigate} from 'react-router-dom'
-
 export default function ViewUser() {
   
     const [user, setUser] = useState({
@@ -16,24 +14,29 @@ export default function ViewUser() {
         weight:""
     });
 
+    const [email, setEmail] = useState('');
+;
+
     const onInputChange = (e) => {
-        setUser({ ...user, [e.target.name]: e.target.value });
+        setEmail(e.target.value);  
       };
 
-    const {email}=useParams();
+    
 
     useEffect(()=>{
-        fetch("http://localhost:8080/calorie_counter/user/${email}")
-        .then(res=>res.json)
-        .then((result)=>{
-            setUser(result)
-        })
+        
     }, [])
   
-    const onSubmit= async (e)=>{
-        e.preventDefault()
-        const result = await axios.get("http://localhost:8080/calorie_counter/user/${email}",user)
-        setUser(result.data)
+    const onSubmit = async (e)=>{
+        e.preventDefault();
+        
+       await axios.get(`http://localhost:8080/calorie_counter/user/email.${email}`)
+        .then(res => {
+            console.log(res)
+            setUser(res.data)
+        }).catch(err => {
+            console.log(err)
+        })
       }
     return (
     <div className='col-md-6 offset-md-3 border rounded p-4 mt-2 shadow'>
@@ -46,12 +49,12 @@ export default function ViewUser() {
             type={'text'}
             className='form-control'
             placeholder='Enter E-mail'
-            onChange={(e)=>onInputChange(e)}
+            onChange= {(e) => onInputChange(e)}
             value={email}
-            name='email'
+            
+            
             />
             <button type="submit" className='btn btn-outline-success'>Submit</button>
-            <button type="submit" className='btn btn-outline-danger mx-2'>Cancel</button>
         </div>
         </form>
     <div className='card'>
