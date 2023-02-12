@@ -16,10 +16,10 @@ export default function Home() {
       <td ><Link className='btn btn-success mx-2' to={'/viewuser'}>View</Link></td>
     </tr>
     <tr>
-      <td ><button className='btn btn-outline-success mx-2'>Edit</button></td>
+      <td ><Link className='btn btn-outline-success mx-2' to={'/edituser'}>Edit</Link></td>
     </tr>
     <tr>
-      <td ><button className='btn btn-danger mx-2'>Delete</button></td>
+      <td ><Link className='btn btn-danger mx-2' to={'/deleteuser'}>Delete</Link></td>
     </tr>
   </tbody>
 </table>
