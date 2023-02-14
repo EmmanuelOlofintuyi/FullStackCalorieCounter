@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function DeleteUser() {
+    let navigate = useNavigate();
+    
   const [user, setUser] = useState({
     name:"",
     email: "",
@@ -26,6 +28,11 @@ const onInputChange = (e) => {
 useEffect(()=>{
     
 }, [])
+
+const deleteUser = async () => {
+    const result = await axios.delete(`http://localhost:8080/calorie_counter/user/${user.id}`)
+    navigate("/")
+}
 
 const onSubmit = async (e)=>{
     e.preventDefault();
@@ -95,7 +102,10 @@ const onSubmit = async (e)=>{
                 </li>
             </ul>
         </div>
-        <button type="submit" className="btn btn-outline-primary">
+        <button 
+        type="submit" 
+        className="btn btn-outline-primary"
+        onClick={() => deleteUser(user.id)}>
               Delete
             </button>
             <Link className="btn btn-outline-danger mx-2" to="/">
